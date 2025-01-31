@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hazards Detection and Response System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #2c3e50;
+            --accent-color: #3498db;
+            --background-color: #ecf0f1;
+            --text-color: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .header h1 {
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--background-color);
+            padding-bottom: 10px;
+        }
+
+        .card-header i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .alerts .alert-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .map-placeholder {
+            height: 250px;
+            background: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        .emergency-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e74c3c;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .emergency-button:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hazards Detection and Response System</h1>
+    </div>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="card alerts">
+                <div class="card-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>Live Alerts</h2>
+                </div>
+                <div class="alert-box">
+                    <i class="fas fa-bell mr-2"></i> No active Hazards at this time
+                </div>
+            </div>
+
+            <div class="card map">
+                <div class="card-header">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h2>Hazards Location</h2>
+                </div>
+                <div class="map-placeholder">
+                    <i class="fas fa-map fa-3x text-muted"></i>
+                </div>
+            </div>
+
+            <div class="card logs">
+                <div class="card-header">
+                    <i class="fas fa-history"></i>
+                    <h2>Hazards Logs</h2>
+                </div>
+                <div class="log-entry">
+                    <i class="fas fa-check-circle"></i> System monitoring active - All systems operational
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="emergency-button">
+        <i class="fas fa-phone-alt mr-2"></i> Cooperation Contact
+    </button>
+</body>
+</html>

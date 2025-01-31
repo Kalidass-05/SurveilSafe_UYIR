@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="service1.css">
+    <title>Emergency Response Service</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/uyirlogo-removebg-preview.png" alt="UYIR - Road Safety Our Right">
+                <img src="images/tamil-nadu-government-logo.jpg" alt="UYIR - Road Safety Our Right">
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#infrastructure">Infrastructure</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="signup.html">
+                    <button id="login-btn">Sign Up</button>
+                </a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!-- Emergency Response Service Heading -->
+    <div class="container">
+        <h1>Emergency Response Service</h1>
+        <img src="images/uyirlogo-removebg-preview.png" alt="Emergency Service Logo" class="center-logo">
+
+        <!-- Login Form -->
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <input type="email" placeholder="Email" name="email" required value="abc@gmail.vom">
+                <input type="password" placeholder="Password" name="password" required value="123">
+                <select name="usertype" style="margin-bottom: 10px;">
+                    <option value="" disabled selected>Select User</option>
+                    <option value="Emergency Responce Team">Emergency Responce Team</option>
+                    <option value="Road Hazards">Road Hazards</option>
+                </select>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@SurveilSafe.gov.in</p>
+                    <p>Phone: +91-123-456-7890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Services</a></li>
+                        <li><a href="#" class="text-white">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2025 UYIR SurveilSafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+            /* Reset all default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        margin-top: 100px; /* Adjust to account for fixed navbar */
+    }
+
+    /* Navbar styles */
+    .navbar {
+        padding: 1rem 2rem;
+        background-color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navbar container */
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Logo styling */
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .logo img {
+        height: 80px;
+        width: 80px;
+    }
+
+    /* Navigation links */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    /* Hover effect for navigation links */
+    .nav-links a:hover {
+        color: #fff;
+        background-color: #004A8F;
+        border-radius: 4px;
+    }
+
+    /* Active link */
+    .nav-links a.active {
+        color: #fff;
+        background-color: #004A8F;
+        border-radius: 4px;
+    }
+
+    /* Surveil Safe Heading */
+    .head1 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 58px;
+        font-weight: 700;
+        line-height: 1.4;
+        margin-top: 100px;
+        padding: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        color: rgb(0, 0, 253);
+    }
+
+    /* Project Topic Heading */
+    .head2 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1.4;
+        margin-top: 5px;
+        padding: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        color: black;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .nav-buttons button {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    #login-btn {
+        background-color: transparent;
+        color: #004A8F;
+        border: 2px solid #004A8F;
+    }
+    
+    #signup-btn {
+        background-color: #004A8F;
+        color: white;
+        border: none;
+    }
+    
+    #login-btn:hover {
+        background-color: #004A8F;
+        color: white;
+    }
+    
+    #signup-btn:hover {
+        background-color: #002f6c;
+    }
+    /* Slideshow styles */
+    .slideshow-container {
+        position: relative;
+        max-width: 100%;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        color: #333;
+        appearance: none;
+        outline: none;
+    }
+    
+    select:focus {
+        border-color: #4CAF50;
+        background-color: #e8f5e9;
+    }
+    
+    select::-ms-expand {
+        display: none;
+    }
+    
+    select {
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"%3E%3Cpath d="M2.5 3L5 5.5L7.5 3" stroke="%23333" stroke-width="2" fill="none" /%3E%3C/svg%3E');
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 10px;
+    }
+    
+    option[disabled] {
+        color: #888;
+        font-style: italic;
+    }
+    
+
+    .footer {
+        background: #004A8F;
+        color: white;
+        padding: 40px 0;
+        text-align: center;
+    }
+    
+    .footer .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    
+    .footer .row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    
+    .footer .col-md-4 {
+        flex: 1;
+        min-width: 250px;
+        padding: 20px;
+    }
+    
+    .footer h5 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+    
+    .footer p, .footer ul {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 5px 0;
+    }
+    
+    .footer ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer ul li {
+        margin-bottom: 8px;
+    }
+    
+    .footer ul li a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.3s ease;
+    }
+    
+    .footer ul li a:hover {
+        color: #FFD700;
+    }
+    
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+    
+    .social-icons a {
+        color: white;
+        font-size: 22px;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+        transform: scale(1.2);
+        color: #FFD700;
+    }
+    
+    .footer .text-center {
+        margin-top: 20px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    /* Slideshow animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 3s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes fade {
+        0% { opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+
+    /* Prevent the dropdown from interfering with other hover effects */
+    .nav-links a:hover, .dropdown-content a:hover {
+        z-index: 1002;
+    }
+
+    /* Surveil Safe Heading */
+    .heading-container {
+        position: relative;
+        width: 100%;
+        height: 600px; /* You can adjust the height as per your need */
+        background-image: url('images/cam.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white; /* Ensures the text is visible on the background */
+        padding: 20px;
+        text-align: left;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .nav-container {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-links {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .nav-links a {
+            width: 100%;
+            text-align: center;
+        }
+
+        .dropdown-content {
+            position: static;
+            width: 100%;
+        }
+
+        .navbar {
+            padding: 1rem;
+        }
+
+        .logo {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Optional: Make navigation links stacked in small screens */
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        /* Add a toggle button (hamburger) */
+        .nav-toggle {
+            display: block;
+            cursor: pointer;
+            font-size: 24px;
+        }
+    }
+
+    /* Styling for the Emergency Response Service heading */
+    .container {
+        text-align: center;
+        margin-top: 150px;
+        padding-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #004A8F;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Centering the logo */
+    .center-logo {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    /* Login Box Styling */
+    .login-box {
+        width: 350px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 8px;
+        background: #f4f4f4;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .login-box h2 {
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 1.8rem;
+    }
+
+    .login-box input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .login-box button {
+        width: 100%;
+        padding: 10px;
+        background-color: #004A8F;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .login-box button:hover {
+        background-color: #002f5e;
+    }
+
+    /* Signup link */
+    .signup-text {
+        margin-top: 10px;
+        font-size: 0.9rem;
+    }
+
+    .signup-text a {
+        color: #004A8F;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .signup-text a:hover {
+        text-decoration: underline;
+    }
+
+    </style>
+</body>
+</html>

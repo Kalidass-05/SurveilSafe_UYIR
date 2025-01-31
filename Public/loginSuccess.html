@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Success</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .success-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .success-container img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .success-container h1 {
+            font-size: 36px;
+            color: #4CAF50;
+        }
+
+        .success-container p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="images/uyirlogo-removebg-preview.png" alt="UYIR - Road Safety Our Right">
+                <img src="images/tamil-nadu-government-logo.jpg" alt="UYIR - Road Safety Our Right">
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#infrastructure">Infrastructure</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="login.html">
+                    <button id="login-btn">Login</button>
+                </a>
+                <a href="signup.html">
+                    <button id="signup-btn">Sign Up</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="success-container">
+        <img src="images/success-56.png" alt="Success">
+        <h1>Login Successful!</h1>
+        <p>Welcome back to UYIR SurveilSafe! You are now logged in.</p>
+        <a href="dashboard1.html" class="btn">Go to Dashboard</a>
+    </div>
+
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@SurveilSafe.gov.in</p>
+                    <p>Phone: +91-123-456-7890</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Services</a></li>
+                        <li><a href="#" class="text-white">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2025 UYIR SurveilSafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin-top: 100px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .logo img {
+            height: 80px;
+            width: 80px;
+        }
+        
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+            background-color: #004A8F;
+            border-radius: 4px;
+        }
+        
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            min-width: 160px;
+            z-index: 1001;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f9f9f9;
+            color: #004A8F;
+        }
+        
+        /* Login & Signup Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #login-btn {
+            background-color: transparent;
+            color: #004A8F;
+            border: 2px solid #004A8F;
+        }
+        
+        #signup-btn {
+            background-color: #004A8F;
+            color: white;
+            border: none;
+        }
+        
+        #login-btn:hover {
+            background-color: #004A8F;
+            color: white;
+        }
+        
+        #signup-btn:hover {
+            background-color: #002f6c;
+        }
+        
+        /* Heading Container */
+        .heading-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+            margin-right: 20px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 50%, transparent 50%), 
+                        url('images/bg3.jpg');
+            background-size: cover;
+            background-position: top 40px right 40px;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .success-container {
+            margin-top: 150px; /* Increase top margin */
+        }
+
+        .success-container {
+            margin-top: calc(100px + 50px); /* Adjust based on navbar height */
+        }
+        
+        .success-container {
+            text-align: center;
+            background-color: #f0fff4;
+            border: 2px solid #34d399;
+            border-radius: 12px;
+            padding: 20px;
+            width: 50%;
+            max-width: 400px;
+            margin: 120px auto; /* Adjusted margin-top to 120px */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        
+        .success-container img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .success-container h1 {
+            font-size: 24px;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+        
+        .success-container p {
+            font-size: 16px;
+            color: #065f46;
+            margin-bottom: 20px;
+        }
+        
+        .success-container .btn {
+            display: inline-block;
+            background-color: #10b981;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .success-container .btn:hover {
+            background-color: #059669;
+        }
+        
+        .head1 {
+            font-size: 58px;
+            font-weight: 700;
+            margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: rgb(0, 0, 253);
+        }
+        
+        .head2 {
+            font-size: 30px;
+            font-weight: 700;
+            margin-top: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+        
+        .description {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-left: 5px solid #004A8F;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .des {
+            font-size: 32px;
+            font-weight: 700;
+            color: #004A8F;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .description p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            text-align: justify;
+        }
+        
+        .footer {
+            background: #004A8F;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .footer .row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer .col-md-4 {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+        }
+        
+        .footer h5 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .footer p, .footer ul {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer ul li a {
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        
+        .footer ul li a:hover {
+            color: #FFD700;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 22px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #FFD700;
+        }
+        
+        .footer .text-center {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Footer */
+        @media (max-width: 768px) {
+            .footer .row {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .description {
+                padding: 15px;
+                margin: 30px 15px;
+            }
+            .des {
+                font-size: 28px;
+            }
+            .description p {
+                font-size: 16px;
+            }
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-buttons a {
+            text-decoration: none;
+        }
+        
+        .nav-buttons button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-buttons button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1024px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+            }
+            .navbar {
+                padding: 1rem;
+            }
+            .logo {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-toggle {
+                display: block;
+                cursor: pointer;
+                font-size: 24px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .nav-buttons button {
+                width: 100%;
+            }
+        }
+        
+    </style>
+</body>
+</html>

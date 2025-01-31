@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Detection and Response System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header-container {
+            background: linear-gradient(90deg, #dc3545, #c82333);
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .moving-text {
+            color: white;
+            font-size: 2rem;
+            animation: slideIn 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 90px 20px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #dc3545;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alerts {
+            grid-column: 1 / -1;
+        }
+
+        .alert-box {
+            background: #fff8f8;
+            border: 1px solid #dc3545;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+            color: #dc3545;
+            animation: pulse 2s infinite;
+        }
+
+        .map {
+            grid-column: 1 / -1;
+        }
+
+        .map-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 5px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+
+        .responders ul {
+            list-style: none;
+        }
+
+        .responders li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+            transition: background-color 0.3s ease;
+        }
+
+        .responders li:hover {
+            background: #e9ecef;
+        }
+
+        .logs .log-entry {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        /* Status Indicators */
+        .status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .status-available {
+            background: #28a745;
+            box-shadow: 0 0 5px #28a745;
+            animation: blink 2s infinite;
+        }
+
+        .status-responding {
+            background: #dc3545;
+            box-shadow: 0 0 5px #dc3545;
+            animation: blink 1s infinite;
+        }
+
+        .status-standby {
+            background: #ffc107;
+            box-shadow: 0 0 5px #ffc107;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                padding: 80px 10px 10px;
+            }
+
+            .moving-text {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .map-placeholder {
+                height: 200px;
+            }
+        }
+
+        /* Emergency Button */
+        .emergency-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .emergency-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Timer and Confirm Button */
+        .timer-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .timer {
+            font-size: 1.5rem;
+            color: #dc3545;
+        }
+
+        .confirm-button {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="moving-text">Accident Detection and Response System</h1>
+    </div>
+    
+    <div class="dashboard">
+        <!-- Live Alerts Section -->
+        <div class="section alerts">
+            <h2><i class="fas fa-exclamation-triangle"></i> Live Alerts</h2>
+            <div class="alert-box">
+                <i class="fas fa-bell"></i> No active emergencies at this time
+            </div>
+        </div>
+        
+        <!-- Map Section -->
+        <div class="section map">
+            <h2><i class="fas fa-map-marked-alt"></i> Emergency Location</h2>
+            <div class="map-placeholder">
+                <i class="fas fa-map fa-3x"></i>
+            </div>
+        </div>
+        
+        <!-- Responder Status -->
+        <div class="section responders">
+            <h2><i class="fas fa-user-md"></i> Responder Status</h2>
+            <ul>
+                <li><span class="status status-available"></span>🚑 Ambulance Team A - Available</li>
+                <li><span class="status status-responding"></span>🚒 Fire Response Unit - Responding</li>
+                <li><span class="status status-standby"></span>🚓 Police Unit 142 - On Standby</li>
+            </ul>
+
+            <!-- Timer and Confirm Button -->
+            <div class="timer-container">
+                <div class="timer" id="timer">02:00</div>
+                <button class="confirm-button" id="confirmButton">Confirm Response</button>
+            </div>
+        </div>
+        
+        <!-- Incident Logs -->
+        <div class="section logs">
+            <h2><i class="fas fa-history"></i> Incident Logs</h2>
+            <div class="log-entry">
+                <i class="fas fa-check-circle"></i> System monitoring active - All systems operational
+            </div>
+        </div>
+    </div>
+
+    <button class="emergency-button">
+        <i class="fas fa-phone-alt"></i> Emergency Contact
+    </button>
+
+    <script>
+        let timerElement = document.getElementById('timer');
+        let confirmButton = document.getElementById('confirmButton');
+        let countdown;
+        let seconds = 120;
+
+        // Timer function
+        function startTimer() {
+            countdown = setInterval(function() {
+                let minutes = Math.floor(seconds / 60);
+                let remainingSeconds = seconds % 60;
+                remainingSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+                timerElement.textContent = `${minutes}:${remainingSeconds}`;
+                if (seconds <= 0) {
+                    clearInterval(countdown);
+                }
+                seconds--;
+            }, 1000);
+        }
+
+        // Start the timer when the alert is triggered
+        confirmButton.addEventListener('click', function() {
+            startTimer();
+            confirmButton.disabled = true; // Disable the confirm button after it's clicked
+        });
+    </script>
+</body>
+</html>
