@@ -21,11 +21,6 @@
                 <a href="#gallery">Gallery</a>
                 <a href="#contact">Contact</a>
             </div>
-            <div class="nav-buttons">
-                <a href="signup.html">
-                    <button id="login-btn">Sign Up</button>
-                </a>
-            </div>
             
         </div>
     </nav>
@@ -38,13 +33,13 @@
         <!-- Login Form -->
         <div class="login-box">
             <h2>Login</h2>
-            <form action="/login" method="post">
-                <input type="email" placeholder="Email" name="email" required value="abc@gmail.vom">
+            <form action="/api/users/login" method="post">
+                <input type="email" placeholder="Email" name="email" required value="vicky@gmail.com">
                 <input type="password" placeholder="Password" name="password" required value="123">
-                <select name="usertype" style="margin-bottom: 10px;">
+                <select name="userType" style="margin-bottom: 10px;" required>
                     <option value="" disabled selected>Select User</option>
-                    <option value="Emergency Responce Team">Emergency Responce Team</option>
-                    <option value="Road Hazards">Road Hazards</option>
+                    <option value="Emergency">Emergency Responce Team</option>
+                    <option value="Hazards">Road Hazards</option>
                 </select>
                 <button type="submit">Login</button>
             </form>
