@@ -17,8 +17,7 @@ const login = async ({ email, password, userType }) => {
         if (user.userType != userType) {
             throw new Error("Unauthorized user type");
         }
-
-        const token = jwt.sign({ id: user._id, email: user.email, userType: user.UserType }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, email: user.email, userType: user.userType }, process.env.JWT_SECRET, { expiresIn: '1h' });
         return { message: "Login successful", token };
     } catch (error) {
         throw new Error(error.message);

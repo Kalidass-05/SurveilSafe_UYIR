@@ -1,26 +1,42 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./Routes/UserRoutes');
 const dotenv = require('dotenv');
-const {authenticateUser} = require('./Middleware/AuthMiddleware')
+const {authenticateUser, authenticateEmergencyUser, authenticateHazardsUser, checkForTocken} = require('./Middleware/AuthMiddleware')
 
 dotenv.config();
 const app = express();
 const PORT = 3000;
-const MONGO_URI = 'mongodb+srv://jv8110909191:ASas12.,@cluster0.qsdf4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'; 
+const MONGO_URI = process.env.MONGO_URI; 
 
 app.use(cookieParser());
-app.use(bodyParser())
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
+
 app.use('/protected', authenticateUser, express.static('public'));
+app.use('/emergency', authenticateEmergencyUser, express.static('public'));
+app.use('/hazards', authenticateHazardsUser, express.static('public'));
 app.use(express.static('public'));
+
 app.use('/api/users', userRoutes);
 
-mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+app.get('/', (req,res) => {
+    let userType = checkForTocken(req);
+    switch(userType){
+        case 'Emergency':
+            res.redirect('/emergency');
+            break;
+        case 'Hazards':
+            res.redirect('/hazards');
+            break;
+        default:
+            res.redirect('/home.html');
+            break;
+    }
+});
+
+mongoose.connect(MONGO_URI)
 .then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
