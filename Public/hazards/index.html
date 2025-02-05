@@ -122,9 +122,138 @@
                 grid-template-columns: 1fr;
             }
         }
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .logo img {
+            height: 80px;
+            width: 80px;
+        }
+        
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+            background-color: #004A8F;
+            border-radius: 4px;
+        }
+        
+        
+        /* Login & Signup Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .logs {
+            margin-top: 20px;
+        }
+        
+
+        .nav-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #login-btn {
+            background-color: transparent;
+            color: #004A8F;
+            border: 2px solid #004A8F;
+        }
+
+        #signup-btn {
+            background-color: #004A8F;
+            color: white;
+            border: none;
+        }
+
+        #login-btn:hover {
+            background-color: #004A8F;
+            color: white;
+        }
+
+        #signup-btn:hover {
+            background-color: #002f6c;
+        }
+
+        .heatmap-container {
+            margin-top: 20px;
+        }
+
+        .heatmap-placeholder {
+            height: 300px;
+            background: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
     </style>
 </head>
+
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="insideimage/uyirlogo-removebg-preview.png" alt="UYIR - Road Safety Our Right">
+                <img src="insideimage/tamil-nadu-government-logo.jpg" alt="UYIR - Road Safety Our Right">
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#infrastructure">Infrastructure</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="login.html">
+                    <button id="login-btn">Logout</button>
+                </a>
+            </div>
+            
+        </div>
+    </nav>
     <div class="header">
         <h1>Hazards Detection and Response System</h1>
     </div>
@@ -150,14 +279,26 @@
                     <i class="fas fa-map fa-3x text-muted"></i>
                 </div>
             </div>
+        </div>
 
-            <div class="card logs">
+        <div class="card logs">
+            <div class="card-header">
+                <i class="fas fa-history"></i>
+                <h2>Hazards Logs</h2>
+            </div>
+            <div class="log-entry">
+                <i class="fas fa-check-circle"></i> System monitoring active - All systems operational
+            </div>
+        </div>
+
+        <div class="heatmap-container">
+            <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-history"></i>
-                    <h2>Hazards Logs</h2>
+                    <i class="fas fa-fire"></i>
+                    <h2>Accident Hotspot Heatmap</h2>
                 </div>
-                <div class="log-entry">
-                    <i class="fas fa-check-circle"></i> System monitoring active - All systems operational
+                <div class="heatmap-placeholder">
+                    <i class="fas fa-map fa-3x text-muted"></i>
                 </div>
             </div>
         </div>
