@@ -36,6 +36,11 @@ app.get('/', (req,res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
+});
+
 mongoose.connect(MONGO_URI)
 .then(() => {
     app.listen(PORT, () => {
