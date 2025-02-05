@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hazards Detection and Response System</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    
+    <!-- Leaflet CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
     <style>
         :root {
             --primary-color: #4a90e2;
@@ -21,7 +25,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -41,6 +45,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             border-radius: 10px;
+            margin-top: 110px;
         }
 
         .header h1 {
@@ -50,8 +55,32 @@
 
         .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px; /* Increase space between grid items */
+        }
+        
+        
+        .logs {
+            grid-column: span 2; /* Make it span both columns */
+            margin-top: 20px; /* Adds spacing from the elements above */
+        }
+        
+        #login-btn {
+            padding: 8px 15px;
+            border: 2px solid #dc3545; /* Red border */
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            background-color: transparent;
+            color: #dc3545; /* Red text */
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        /* Hover Effect */
+        #login-btn:hover {
+            background-color: #dc3545; /* Red background */
+            color: white; /* White text */
         }
 
         .card {
@@ -88,12 +117,10 @@
             align-items: center;
         }
 
-        .map-placeholder {
+        /* Map Container */
+        #map {
             height: 250px;
-            background: var(--background-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
             border-radius: 8px;
         }
 
@@ -122,6 +149,7 @@
                 grid-template-columns: 1fr;
             }
         }
+
         .navbar {
             padding: 1rem 2rem;
             background-color: white;
@@ -140,26 +168,24 @@
             justify-content: space-between;
             align-items: center;
         }
-        
-        /* Logo */
+
         .logo {
             display: flex;
             align-items: center;
             gap: 30px;
         }
-        
+
         .logo img {
             height: 80px;
             width: 80px;
         }
-        
-        /* Navigation Links */
+
         .nav-links {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-        
+
         .nav-links a {
             text-decoration: none;
             color: #333;
@@ -167,66 +193,11 @@
             font-weight: 500;
             transition: all 0.3s ease;
         }
-        
+
         .nav-links a:hover, .nav-links a.active {
             color: #fff;
             background-color: #004A8F;
             border-radius: 4px;
-        }
-        
-        
-        /* Login & Signup Buttons */
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .logs {
-            margin-top: 20px;
-        }
-        
-
-        .nav-buttons button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        #login-btn {
-            background-color: transparent;
-            color: #004A8F;
-            border: 2px solid #004A8F;
-        }
-
-        #signup-btn {
-            background-color: #004A8F;
-            color: white;
-            border: none;
-        }
-
-        #login-btn:hover {
-            background-color: #004A8F;
-            color: white;
-        }
-
-        #signup-btn:hover {
-            background-color: #002f6c;
-        }
-
-        .heatmap-container {
-            margin-top: 20px;
-        }
-
-        .heatmap-placeholder {
-            height: 300px;
-            background: var(--background-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 8px;
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -235,8 +206,8 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="images/uyirlogo-removebg-preview.png" alt="UYIR - Road Safety Our Right">
-                <img src="images/tamil-nadu-government-logo.jpg" alt="UYIR - Road Safety Our Right">
+                <img src="images/uyirlogo-removebg-preview.png" alt="UYIR - Road Safety">
+                <img src="images/tamil-nadu-government-logo.jpg" alt="Tamil Nadu Government">
             </div>
             <div class="nav-links">
                 <a href="#about">About Us</a>
@@ -250,9 +221,11 @@
                     <input id="login-btn" type="submit" value="Logout"/>
                 </form>
             </div>
-            
         </div>
     </nav>
+
+
+
     <div class="header">
         <h1>Hazards Detection and Response System</h1>
     </div>
@@ -274,9 +247,7 @@
                     <i class="fas fa-map-marked-alt"></i>
                     <h2>Hazards Location</h2>
                 </div>
-                <div class="map-placeholder">
-                    <i class="fas fa-map fa-3x text-muted"></i>
-                </div>
+                <div id="map"></div>
             </div>
         </div>
 
@@ -289,22 +260,26 @@
                 <i class="fas fa-check-circle"></i> System monitoring active - All systems operational
             </div>
         </div>
-
-        <div class="heatmap-container">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-fire"></i>
-                    <h2>Accident Hotspot Heatmap</h2>
-                </div>
-                <div class="heatmap-placeholder">
-                    <i class="fas fa-map fa-3x text-muted"></i>
-                </div>
-            </div>
-        </div>
     </div>
 
     <button class="emergency-button">
         <i class="fas fa-phone-alt mr-2"></i> Cooperation Contact
     </button>
+
+    <!-- Leaflet JS for OpenStreetMap -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+        var map = L.map('map').setView([11.0168, 76.9558], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([11.0168, 76.9558]).addTo(map)
+            .bindPopup('Coimbatore, Tamil Nadu')
+            .openPopup();
+    </script>
+
 </body>
 </html>
