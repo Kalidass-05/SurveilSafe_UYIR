@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./Routes/UserRoutes');
+const emergencyRoutes = require('./Routes/EmergencyRoutes');
+const hazardsRouter = require('./Routes/HazardsRoutes');
 const dotenv = require('dotenv');
 const {authenticateUser, authenticateEmergencyUser, authenticateHazardsUser, checkForTocken} = require('./Middleware/AuthMiddleware')
 
@@ -20,6 +22,8 @@ app.use('/hazards', authenticateHazardsUser, express.static('public'));
 app.use(express.static('public'));
 
 app.use('/api/users', userRoutes);
+app.use('/api/emergency', emergencyRoutes);
+app.use('/api/hazards', hazardsRouter);
 
 app.get('/', (req,res) => {
     let userType = checkForTocken(req);
