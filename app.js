@@ -22,8 +22,8 @@ app.use('/hazards', authenticateHazardsUser, express.static('public'));
 app.use(express.static('public'));
 
 app.use('/api/users', userRoutes);
-app.use('/api/emergency', emergencyRoutes);
-app.use('/api/hazards', hazardsRouter);
+app.use('/api/emergency', authenticateEmergencyUser, emergencyRoutes);
+app.use('/api/hazards', authenticateHazardsUser, hazardsRouter);
 
 app.get('/', (req,res) => {
     let userType = checkForTocken(req);

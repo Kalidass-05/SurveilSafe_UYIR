@@ -237,9 +237,7 @@
                     <i class="fas fa-exclamation-triangle"></i>
                     <h2>Live Alerts</h2>
                 </div>
-                <div class="alert-box">
-                    <i class="fas fa-bell mr-2"></i> No active Hazards at this time
-                </div>
+                <div id="card-alerts"></div>
             </div>
 
             <div class="card map">
@@ -256,8 +254,7 @@
                 <i class="fas fa-history"></i>
                 <h2>Hazards Logs</h2>
             </div>
-            <div class="log-entry">
-                <i class="fas fa-check-circle"></i> System monitoring active - All systems operational
+            <div id="card-alerts-responded">
             </div>
         </div>
     </div>
@@ -279,6 +276,42 @@
         L.marker([11.0168, 76.9558]).addTo(map)
             .bindPopup('Coimbatore, Tamil Nadu')
             .openPopup();
+
+        const loadData = () => {
+            fetch('/api/hazards')
+                .then(res => res.json())
+                .then(data => {
+                    const card_alerts = document.getElementById("card-alerts")
+                    const card_alerts_responded = document.getElementById("card-alerts-responded")
+                    card_alerts.innerHTML = "";
+                    card_alerts_responded.innerHTML = "";
+                    data.forEach(element => {
+                        if(element.status == "not-responded"){
+                            card_alerts.innerHTML += `
+                                <div>
+                                    ${element.cameraId}&nbsp;
+                                    ${new Date(element.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}&nbsp;
+                                    <a href='/hazards/detail.html?id=${element._id}'>Open</a>
+                                </div>`
+                        }
+                        else{
+                            card_alerts_responded.innerHTML += `
+                                <div>
+                                    ${element.cameraId}&nbsp;
+                                    ${new Date(element.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}&nbsp;
+                                    <a href='/hazards/detail.html?id=${element._id}'>Open</a>
+                                </div>`
+                        }
+                    });
+                    console.log(data)
+                })
+        }
+
+        loadData()
+
+        setInterval(()  => {
+            loadData()
+        },30000)
     </script>
 
 </body>

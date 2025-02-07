@@ -24,13 +24,4 @@ const updateEmergencyStatus = async (id) => {
     }
 };
 
-const addEmergency = async (data) => {
-    try {
-        const newEmergency = new Emergency(data);
-        return await newEmergency.save();
-    } catch (error) {
-        throw new Error(`Error adding emergency: ${error.message}`);
-    }
-};
-
-module.exports = { getAllEmergencies, getEmergencyById, updateEmergencyStatus, addEmergency };
+module.exports = { getAllEmergencies, getEmergencyById, updateEmergencyStatus };

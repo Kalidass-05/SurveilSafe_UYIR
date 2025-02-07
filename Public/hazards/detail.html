@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hazard Details</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .info {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .info p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .info span {
+            font-weight: bold;
+        }
+        .image-container {
+            margin: 15px 0;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .respond-button, .navigate-button {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .respond-button:hover, .navigate-button:hover {
+            background: #218838;
+        }
+        #map {
+            height: 300px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Hazard Details</h2>
+        <div class="info">
+            <p><span>Latitude:</span> <span id="latitude">Loading...</span></p>
+            <p><span>Longitude:</span> <span id="longitude">Loading...</span></p>
+            <p><span>Camera ID:</span> <span id="cameraId">Loading...</span></p>
+            <p><span>Status:</span> <span id="status">Loading...</span></p>
+            <p><span>Time:</span> <span id="time">Loading...</span></p>
+        </div>
+        <div class="image-container">
+            <img id="hazardImage" src="" alt="Hazard Image">
+        </div>
+        
+        <div id="map"></div>
+
+        <button class="navigate-button" onclick="navigateToHazard()">Navigate</button>
+        <a id="respond-button" >Responded</a>
+        <a href="/">Back</a>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        let hazardLocation = null;
+        let userLocation = null;
+
+        async function fetchHazardDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const hazardId = params.get('id');
+
+            if (!hazardId) {
+                alert("No hazard ID provided!");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/hazards/${hazardId}`);
+                if (!response.ok) throw new Error("Failed to fetch hazard details");
+
+                const data = await response.json();
+
+                document.getElementById("latitude").textContent = data.latitude;
+                document.getElementById("longitude").textContent = data.longitude;
+                document.getElementById("cameraId").textContent = data.cameraId;
+                document.getElementById("status").textContent = data.status || "Pending";
+                document.getElementById("time").textContent = new Date(data.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+                document.getElementById("hazardImage").src = data.image;
+                document.getElementById("respond-button").href = `/api/hazards/update/${data._id}`
+
+                hazardLocation = [data.latitude, data.longitude];
+                initMap();
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                alert("Error fetching hazard details.");
+            }
+        }
+
+        function initMap() {
+            if (!hazardLocation) return;
+
+            const map = L.map('map').setView(hazardLocation, 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Marker for hazard location
+            L.marker(hazardLocation).addTo(map)
+                .bindPopup("Hazard Location")
+                .openPopup();
+
+            // Get user's current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    userLocation = [position.coords.latitude, position.coords.longitude];
+
+                    var greenIcon = new L.Icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                    });
+
+                    // Add marker for user location
+                    L.marker(userLocation,{icon : greenIcon}).addTo(map)
+                    .bindPopup("Your Location")
+                    .openPopup();
+
+                    // Fit map to show both locations
+                    const bounds = L.latLngBounds([hazardLocation, userLocation]);
+                    map.fitBounds(bounds);
+                }, () => {
+                    alert("Could not get your location!");
+                });
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
+
+        function navigateToHazard() {
+            if (!hazardLocation) {
+                alert("Hazard location not available!");
+                return;
+            }
+
+            if (userLocation) {
+                // Open Google Maps for navigation
+                const url = `https://www.google.com/maps/dir/?api=1&origin=${userLocation[0]},${userLocation[1]}&destination=${hazardLocation[0]},${hazardLocation[1]}`;
+                window.open(url, "_blank");
+            } else {
+                alert("Getting your location... Please try again.");
+            }
+        }
+
+        function markResponded() {
+            alert("Hazard marked as responded!");
+        }
+
+        window.onload = fetchHazardDetails;
+    </script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllHazards, getHazardById, updateHazardStatus, addHazard } = require('../Services/HazardsService');
+const { getAllHazards, getHazardById, updateHazardStatus } = require('../Services/HazardsService');
 
 router.get('/', async (req, res) => {
     try {
@@ -23,16 +23,7 @@ router.get('/:id', async (req, res) => {
 router.get('/update/:id', async (req, res) => {
     try {
         await updateHazardStatus(req.params.id);
-        res.json({ message: "Status updated to Responded" });
-    } catch (error) {
-        res.status(400).redirect(`/error.html?message=${encodeURIComponent(error.message)}`);
-    }
-});
-
-router.post('/', async (req, res) => {
-    try {
-        const newHazard = await addHazard(req.body);
-        res.status(201).json(newHazard);
+        res.status(200).redirect('/');
     } catch (error) {
         res.status(400).redirect(`/error.html?message=${encodeURIComponent(error.message)}`);
     }

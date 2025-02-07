@@ -12,7 +12,7 @@ const authenticateUser = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
-        res.status(403).redirect(`/error.html?message=Invalid or expired token.`)
+        return res.status(403).redirect(`/error.html?message=Invalid or expired token.`)
     }
 };
 
@@ -22,16 +22,15 @@ const authenticateEmergencyUser = (req, res, next) => {
     if (!token) {
         return res.status(401).redirect(`/error.html?message=Access Denied. No token provided.`);
     }
-
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         if(decoded.userType != 'Emergency'){
-            res.status(403).redirect(`/error.html?message=access denied for this user type`)
+            return res.status(403).redirect(`/error.html?message=access denied for this user type`)
         }
         req.user = decoded;
         next();
     } catch (error) {
-        res.status(403).redirect(`/error.html?message=Invalid or expired token.`)
+        return res.status(403).redirect(`/error.html?message=Invalid or expired token.`)
     }
 };
 
@@ -45,12 +44,12 @@ const authenticateHazardsUser = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         if(decoded.userType != 'Hazards'){
-            res.status(403).redirect(`/error.html?message=access denied for this user type`)
+            return res.status(403).redirect(`/error.html?message=access denied for this user type`)
         }
         req.user = decoded;
         next();
     } catch (error) {
-        res.status(403).redirect(`/error.html?message=Invalid or expired token.`)
+        return res.status(403).redirect(`/error.html?message=Invalid or expired token.`)
     }
 };
 

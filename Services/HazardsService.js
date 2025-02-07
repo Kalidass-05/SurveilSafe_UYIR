@@ -24,13 +24,4 @@ const updateHazardStatus = async (id) => {
     }
 };
 
-const addHazard = async (data) => {
-    try {
-        const newHazard = new Hazards(data);
-        return await newHazard.save();
-    } catch (error) {
-        throw new Error(`Error adding hazard: ${error.message}`);
-    }
-};
-
-module.exports = { getAllHazards, getHazardById, updateHazardStatus, addHazard };
+module.exports = { getAllHazards, getHazardById, updateHazardStatus};
