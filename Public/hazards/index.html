@@ -185,6 +185,25 @@
             align-items: center;
             gap: 1rem;
         }
+        /* Styled "Open" Button */
+            .open-btn {
+                display: inline-block;
+                margin-bottom: 5px;
+                padding: 8px 12px;
+                background-color: #261ff3; /* Red background */
+                color: white;
+                font-size: 14px;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: bold;
+                transition: background 0.3s ease;
+            }
+
+            .open-btn:hover {
+                background-color: #c82333; /* Darker red on hover */
+            }
+
 
         .nav-links a {
             text-decoration: none;
@@ -291,7 +310,8 @@
                                 <div>
                                     ${element.cameraId}&nbsp;
                                     ${new Date(element.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}&nbsp;
-                                    <a href='/hazards/detail.html?id=${element._id}'>Open</a>
+                                    <a href='/hazards/detail.html?id=${element._id}' class="open-btn">Open</a>
+
                                 </div>`
                         }
                         else{
@@ -299,7 +319,8 @@
                                 <div>
                                     ${element.cameraId}&nbsp;
                                     ${new Date(element.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}&nbsp;
-                                    <a href='/hazards/detail.html?id=${element._id}'>Open</a>
+                                    <a href='/hazards/detail.html?id=${element._id}' class="open-btn">Open</a>
+
                                 </div>`
                         }
                     });

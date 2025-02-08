@@ -192,6 +192,26 @@
             transform: scale(1.05);
         }
 
+        /* Styled "Open" Button */
+            .open-btn {
+                display: inline-block;
+                padding: 8px 12px;
+                background-color: #dc3545; /* Red background */
+                color: white;
+                margin-bottom: 10px;
+                font-size: 14px;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                font-weight: bold;
+                transition: background 0.3s ease;
+            }
+
+            .open-btn:hover {
+                background-color: #c82333; /* Darker red on hover */
+            }
+
+
         .previous-data {
             grid-column: span 2; /* Ensures it spans both columns */
             width: 100%; /* Prevents unwanted shrinking/stretching */
@@ -271,7 +291,7 @@
         <div class="section">
             <h2><i class="fas fa-map-marked-alt"></i> Heat Map</h2>
             <div style="text-align: center;">
-                <img id="emergency-image" src="/Public/images/heatmap.jpg" alt="Emergency Location" style="max-width: 100%; border-radius: 8px;">
+                <img id="emergency-image" src="images/heatmap.jpg" alt="Emergency Location" style="max-width: 100%; border-radius: 8px;">
             </div>
         </div>
         
@@ -292,19 +312,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
-        // Initialize the map
-        var map = L.map('map').setView([11.0168, 76.9558], 13); // Coordinates for Coimbatore
-
-        // Set the OpenStreetMap tile layer
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Optional: Add a marker for Coimbatore
-        L.marker([11.0168, 76.9558]).addTo(map)
-            .bindPopup('Coimbatore, Tamil Nadu')
-            .openPopup();
-
             const loadData = () => {
             fetch('/api/emergency')
                 .then(res => res.json())
@@ -320,7 +327,8 @@
                                 <div>
                                     ${element.cameraId}&nbsp;
                                     ${new Date(element.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}&nbsp;
-                                    <a href='/emergency/detail.html?id=${element._id}'>Open</a>
+                                    <a href='/emergency/detail.html?id=${element._id}' class="open-btn">Open</a>
+
                                 </div>`
                         }
                         else{
@@ -328,7 +336,8 @@
                                 <div>
                                     ${element.cameraId}&nbsp;
                                     ${new Date(element.time).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}&nbsp;
-                                    <a href='/emergency/detail.html?id=${element._id}'>Open</a>
+                                    <a href='/emergency/detail.html?id=${element._id}' class="open-btn">Open</a>
+
                                 </div>`
                         }
                     });

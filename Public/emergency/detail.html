@@ -6,58 +6,133 @@
     <title>Emergency Details</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        /* General Styling */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: auto;  /* Allows scrolling */
         }
+
+        /* Main Container */
         .container {
+            width: 90%;
             max-width: 600px;
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
+
         h2 {
             color: #333;
+            margin-bottom: 15px;
         }
+
+        /* Info Section */
         .info {
             text-align: left;
-            margin: 10px 0;
+            margin-bottom: 15px;
         }
+
         .info p {
             margin: 5px 0;
             font-size: 16px;
+            color: #555;
         }
+
         .info span {
             font-weight: bold;
+            color: #333;
         }
+
+        /* Image Styling */
         .image-container {
             margin: 15px 0;
         }
+
         img {
             max-width: 100%;
             border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .respond-button, .navigate-button {
-            background: #28a745;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 15px;
-        }
-        .respond-button:hover, .navigate-button:hover {
-            background: #218838;
-        }
+
+        /* Map Styling */
         #map {
             height: 300px;
             border-radius: 8px;
             margin-top: 15px;
+        }
+
+        /* Buttons Styling */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigate Button */
+        .navigate-button {
+            background: #007bff;
+            color: white;
+        }
+
+        .navigate-button:hover {
+            background: #0056b3;
+        }
+
+        /* Respond Button */
+        .respond-button {
+            background: #28a745;
+            color: white;
+        }
+
+        .respond-button:hover {
+            background: #218838;
+        }
+
+        /* Back Button */
+        .back-button {
+            background: #6c757d;
+            color: white;
+        }
+
+        .back-button:hover {
+            background: #545b62;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -65,6 +140,7 @@
 
     <div class="container">
         <h2>Emergency Details</h2>
+        
         <div class="info">
             <p><span>Latitude:</span> <span id="latitude">Loading...</span></p>
             <p><span>Longitude:</span> <span id="longitude">Loading...</span></p>
@@ -72,15 +148,19 @@
             <p><span>Status:</span> <span id="status">Loading...</span></p>
             <p><span>Time:</span> <span id="time">Loading...</span></p>
         </div>
+        
         <div class="image-container">
             <img id="emergencyImage" src="" alt="Emergency Image">
         </div>
-        
+
         <div id="map"></div>
 
-        <button class="navigate-button" onclick="navigateToEmergency()">Navigate</button>
-        <a id="respond-button" >Responded</a>
-        <a href="/">Back</a>
+        <!-- Buttons -->
+        <div class="button-container">
+            <button class="btn navigate-button" onclick="navigateToEmergency()">Navigate</button>
+            <a id="respond-button" class="btn respond-button">Responded</a>
+            <a href="/" class="btn back-button">Back</a>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -127,38 +207,32 @@
                 attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
-            // Marker for emergency location
             L.marker(emergencyLocation).addTo(map)
                 .bindPopup("Emergency Location")
                 .openPopup();
 
-            // Get user's current location
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {
                     userLocation = [position.coords.latitude, position.coords.longitude];
 
                     var greenIcon = new L.Icon({
-                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
                     });
 
-                    // Add marker for user location
-                    L.marker(userLocation,{icon : greenIcon}).addTo(map)
-                    .bindPopup("Your Location")
-                    .openPopup();
+                    L.marker(userLocation, { icon: greenIcon }).addTo(map)
+                        .bindPopup("Your Location")
+                        .openPopup();
 
-                    // Fit map to show both locations
                     const bounds = L.latLngBounds([emergencyLocation, userLocation]);
                     map.fitBounds(bounds);
                 }, () => {
                     alert("Could not get your location!");
                 });
-            } else {
-                alert("Geolocation is not supported by your browser.");
             }
         }
 
@@ -168,17 +242,7 @@
                 return;
             }
 
-            if (userLocation) {
-                // Open Google Maps for navigation
-                const url = `https://www.google.com/maps/dir/?api=1&origin=${userLocation[0]},${userLocation[1]}&destination=${emergencyLocation[0]},${emergencyLocation[1]}`;
-                window.open(url, "_blank");
-            } else {
-                alert("Getting your location... Please try again.");
-            }
-        }
-
-        function markResponded() {
-            alert("Emergency marked as responded!");
+            window.open(`https://www.google.com/maps/dir/?api=1&destination=${emergencyLocation[0]},${emergencyLocation[1]}`, "_blank");
         }
 
         window.onload = fetchEmergencyDetails;
