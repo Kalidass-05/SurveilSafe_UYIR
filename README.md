@@ -2,15 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 📌 Overview
 
 The AI-Powered Road Safety & Emergency Response System is a smart IoT + Web platform designed to:
@@ -35,6 +26,8 @@ Emergency Control Room
 🔥 Accident heatmap visualization
 📊 Insights for road safety planning
 🛣️ Helps prioritize road maintenance
+
+
 🧠 System Architecture
 [ Sensors + Camera + GPS ]
             ↓
@@ -47,6 +40,8 @@ Emergency Control Room
    Web Dashboards (Admin / Control Room)
             ↓
         Firebase Alerts
+
+        
 ⚙️ Tech Stack
 💻 Frontend
 HTML
@@ -65,6 +60,8 @@ Firebase (real-time notifications)
 🤖 AI/ML
 Damage detection model
 Accident severity classification
+
+
 🔄 Workflow
 🚗 Accident / pothole detected via sensors & ML
 📷 Image + 📍 GPS data captured using Raspberry Pi
@@ -79,7 +76,7 @@ Corporation → sees potholes & heatmaps
 📉 Accident hotspot identification
 🏙️ Smart city development
 
-(Add your project screenshots here for better impact)
+
 
 🚀 Getting Started
 🔧 Prerequisites
