@@ -75,6 +75,10 @@ Corporation → sees potholes & heatmaps
 🛣️ Smart road maintenance
 📉 Accident hotspot identification
 🏙️ Smart city development
+📍 Real-time traffic incident monitoring
+🚔 Support for law enforcement agencies
+📡 Integration with smart traffic systems
+📈 Long-term urban safety analytics
 
 
 
@@ -113,6 +117,10 @@ POST	/pothole	Upload pothole detection
 🚑 Auto ambulance dispatch system
 🚦 Traffic prediction using AI
 🧠 Advanced accident prediction model
+🧭 Integration with navigation apps (route diversion)
+📷 Night-time accident detection improvements
+☁️ Cloud-based AI model deployment
+🔊 Voice alert system for nearby vehicles
 👨‍💻 Contributors
 Kalidass Lakshmipathi
 Team Members (Add names here)
